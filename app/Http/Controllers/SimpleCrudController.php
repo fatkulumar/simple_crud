@@ -82,11 +82,11 @@ class SimpleCrudController extends Controller
     public function destroy(string $id)
     {
         $data = $this->model::find($id);
-        $data->delete();
-        if ($data->delete() == true) {
-            $this->setResult($data)->setStatus(true)->setMessage('Data Berhasil Update')->setCode(JsonResponse::HTTP_OK);
+        if ($data) {
+            $data->delete();
+            $this->setResult($data)->setStatus(true)->setMessage('Data Berhasil Delete')->setCode(JsonResponse::HTTP_OK);
         }else{
-            $this->setResult($id)->setStatus(true)->setMessage('Data Gagal Update')->setCode(JsonResponse::HTTP_CREATED);
+            $this->setResult($id)->setStatus(false)->setMessage('Data Gagal Delete')->setCode(JsonResponse::HTTP_CREATED);
         }
         return $this->toJson();
     }
